@@ -1,3 +1,4 @@
+import click
 import grpc
 import message_pb2
 import message_pb2_grpc
@@ -58,7 +59,19 @@ def chat_with_server(sender_id: str, receiver_id: str) -> None:
         elif response.status == message_pb2.StatusCode.FAIL:
             logger.error(f"Error: {response.message}")
 
+@click.command()
+@click.option("--username", prompt="Enter your username", help="Your username")
+@click.password_option("--password", prompt="Enter your password", help="Your password")
+def main(username, password):
+    channel = grpc.insecure_channel("localhost:50051")
+    stub = message_pb2_grpc.AuthenticationServiceStub(channel)
+    response = stub.Login(message_pb2.LoginRequest(username=username, password=password))
+    if response.status == message_pb2.StatusCode.OK:
+        receiver_id = input("Enter recipient ID: ").strip()
+        chat_with_server(username, receiver_id)
+    else:
+        logger.error(f"Login failed: {response.status}")
+
+
 if __name__ == "__main__":
-    sender_id = input("Enter your client ID: ").strip()  # Unique identifier for the sender
-    receiver_id = input("Enter recipient ID: ").strip()  # Unique identifier for the recipient
-    chat_with_server(sender_id, receiver_id)
+    main()

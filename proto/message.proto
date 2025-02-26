@@ -24,3 +24,16 @@ message MessageResponse {
   string receiver_id = 3;
   string message = 4;  // The actual message content
 }
+
+service AuthenticationService {
+  rpc Login (LoginRequest) returns (LoginResponse);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  StatusCode status = 1;
+}

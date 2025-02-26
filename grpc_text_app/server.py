@@ -1,5 +1,6 @@
 import grpc
 from concurrent.futures import ThreadPoolExecutor
+from grpc_text_app.auth import upwd
 import message_pb2
 import message_pb2_grpc
 from typing import Dict, Iterator
@@ -67,10 +68,20 @@ class MessageService(message_pb2_grpc.MessageServiceServicer):
                 active_clients.pop(sender_id, None)
             logger.error(f"Client {sender_id} removed from active clients.")
 
+class AuthenticationService(message_pb2_grpc.AuthenticationServiceServicer):
+    def Login(self, request: message_pb2.LoginRequest, context: grpc.ServicerContext) -> message_pb2.LoginResponse:
+        """Handles client login requests."""
+        logger.info(f"Login request received for {request.username}, {request.password}")
+        if request.username in upwd and upwd[request.username] == request.password:
+            return message_pb2.LoginResponse(status=message_pb2.StatusCode.OK)
+        else:
+            return message_pb2.LoginResponse(status=message_pb2.StatusCode.FAIL)
+
 def serve() -> None:
     """Starts the gRPC server."""
     server = grpc.server(ThreadPoolExecutor(max_workers=10))
     message_pb2_grpc.add_MessageServiceServicer_to_server(MessageService(), server)
+    message_pb2_grpc.add_AuthenticationServiceServicer_to_server(AuthenticationService(), server)
     server.add_insecure_port("[::]:50051")
     server.start()
     logger.info("gRPC Server is running on port 50051...")

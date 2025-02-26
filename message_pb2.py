@@ -24,19 +24,25 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\x12\nmessageapp\"I\n\x0eMessageRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x11\n\tsender_id\x18\x02 \x01(\t\x12\x13\n\x0breceiver_id\x18\x03 \x01(\t\"r\n\x0fMessageResponse\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.messageapp.StatusCode\x12\x11\n\tsender_id\x18\x02 \x01(\t\x12\x13\n\x0breceiver_id\x18\x03 \x01(\t\x12\x0f\n\x07message\x18\x04 \x01(\t*+\n\nStatusCode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x08\n\x04\x46\x41IL\x10\x02\x32[\n\x0eMessageService\x12I\n\nChatStream\x12\x1a.messageapp.MessageRequest\x1a\x1b.messageapp.MessageResponse(\x01\x30\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\x12\nmessageapp\"I\n\x0eMessageRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x11\n\tsender_id\x18\x02 \x01(\t\x12\x13\n\x0breceiver_id\x18\x03 \x01(\t\"r\n\x0fMessageResponse\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.messageapp.StatusCode\x12\x11\n\tsender_id\x18\x02 \x01(\t\x12\x13\n\x0breceiver_id\x18\x03 \x01(\t\x12\x0f\n\x07message\x18\x04 \x01(\t\"2\n\x0cLoginRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"7\n\rLoginResponse\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.messageapp.StatusCode*+\n\nStatusCode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02OK\x10\x01\x12\x08\n\x04\x46\x41IL\x10\x02\x32[\n\x0eMessageService\x12I\n\nChatStream\x12\x1a.messageapp.MessageRequest\x1a\x1b.messageapp.MessageResponse(\x01\x30\x01\x32U\n\x15\x41uthenticationService\x12<\n\x05Login\x12\x18.messageapp.LoginRequest\x1a\x19.messageapp.LoginResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'message_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_STATUSCODE']._serialized_start=220
-  _globals['_STATUSCODE']._serialized_end=263
+  _globals['_STATUSCODE']._serialized_start=329
+  _globals['_STATUSCODE']._serialized_end=372
   _globals['_MESSAGEREQUEST']._serialized_start=29
   _globals['_MESSAGEREQUEST']._serialized_end=102
   _globals['_MESSAGERESPONSE']._serialized_start=104
   _globals['_MESSAGERESPONSE']._serialized_end=218
-  _globals['_MESSAGESERVICE']._serialized_start=265
-  _globals['_MESSAGESERVICE']._serialized_end=356
+  _globals['_LOGINREQUEST']._serialized_start=220
+  _globals['_LOGINREQUEST']._serialized_end=270
+  _globals['_LOGINRESPONSE']._serialized_start=272
+  _globals['_LOGINRESPONSE']._serialized_end=327
+  _globals['_MESSAGESERVICE']._serialized_start=374
+  _globals['_MESSAGESERVICE']._serialized_end=465
+  _globals['_AUTHENTICATIONSERVICE']._serialized_start=467
+  _globals['_AUTHENTICATIONSERVICE']._serialized_end=552
 # @@protoc_insertion_point(module_scope)
