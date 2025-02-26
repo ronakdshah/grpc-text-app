@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package messageapp;
+
+service MessageService {
+  rpc ChatStream (stream MessageRequest) returns (stream MessageResponse);
+}
+
+message MessageRequest {
+  string message = 1;
+  string sender_id = 2;
+  string receiver_id = 3;  // The recipient of the message
+}
+
+enum StatusCode {
+  UNKNOWN = 0;
+  OK = 1;
+  FAIL = 2;
+}
+
+message MessageResponse {
+  StatusCode status = 1;
+  string sender_id = 2;
+  string receiver_id = 3;
+  string message = 4;  // The actual message content
+}
